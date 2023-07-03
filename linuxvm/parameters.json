@@ -2,19 +2,13 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "virtualNetworks_vNet_name": {
-            "value": null
-        },
         "virtualMachines_cmubuntu_name": {
             "value": null
         },
-        "networkInterfaces_cmubuntuNetInt_name": {
+        "disks_cmubuntu_OsDisk_1_c6a14682886643b2878e30bdda7bea00_externalid": {
             "value": null
         },
-        "networkSecurityGroups_SecGroupNet_name": {
-            "value": null
-        },
-        "publicIPAddresses_cmubuntuPublicIP_name": {
+        "networkInterfaces_cmubuntuNetInt_externalid": {
             "value": null
         }
     }
