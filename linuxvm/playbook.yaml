@@ -1,0 +1,12 @@
+- name: Create a linux web app with python framework
+  azure_rm_webapp:
+    resource_group: cmdockerlab
+    name: myLinuxWebapp
+    plan:
+      resource_group: cmdockerlab
+      name: myAppServicePlan
+    app_settings:
+      testkey: testvalue
+    frameworks:
+      - name: "python"
+        version: "3.10"

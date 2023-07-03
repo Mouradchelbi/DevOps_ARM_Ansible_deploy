@@ -1,0 +1,15 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_mouchel_name": {
+            "value": null
+        },
+        "disks_mouchel_OsDisk_1_d78787cfd071495baef191709453b500_externalid": {
+            "value": null
+        },
+        "networkInterfaces_mouchel187_externalid": {
+            "value": null
+        }
+    }
+}
