@@ -2,7 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "virtualMachines_mouchel2_name": {
+        "virtualMachines_mouchel_name": {
             "defaultValue": "mouchel",
             "type": "String"
         },
@@ -20,7 +20,7 @@
         {
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2023-03-01",
-            "name": "[parameters('virtualMachines_mouchel2_name')]",
+            "name": "[parameters('virtualMachines_mouchel_name')]",
             "location": "northeurope",
             "tags": {
                 "jenkins-docker-python-java": ""
@@ -38,7 +38,7 @@
                     },
                     "osDisk": {
                         "osType": "Linux",
-                        "name": "[concat(parameters('virtualMachines_mouchel2_name'), '_OsDisk_1_d78787cfd071495baef191709453b500')]",
+                        "name": "[concat(parameters('virtualMachines_mouchel_name'), '_OsDisk_1_d78787cfd071495baef191709453b500')]",
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
                         "managedDisk": {
@@ -50,8 +50,8 @@
                     "diskControllerType": "SCSI"
                 },
                 "osProfile": {
-                    "computerName": "[parameters('virtualMachines_mouchel2_name')]",
-                    "adminUsername": "[parameters('virtualMachines_mouchel2_name')]",
+                    "computerName": "[parameters('virtualMachines_mouchel_name')]",
+                    "adminUsername": "[parameters('virtualMachines_mouchel_name')]",
                     "linuxConfiguration": {
                         "disablePasswordAuthentication": false,
                         "provisionVMAgent": true,

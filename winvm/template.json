@@ -2,7 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "virtualMachines_cmwindesk2_name": {
+        "virtualMachines_cmwindesk_name": {
             "defaultValue": "cmwindesk",
             "type": "String"
         },
@@ -20,7 +20,7 @@
         {
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2023-03-01",
-            "name": "[parameters('virtualMachines_cmwindesk2_name')]",
+            "name": "[parameters('virtualMachines_cmwindesk_name')]",
             "location": "westus",
             "properties": {
                 "hardwareProfile": {
@@ -35,7 +35,7 @@
                     },
                     "osDisk": {
                         "osType": "Windows",
-                        "name": "[concat(parameters('virtualMachines_cmwindesk2_name'), '_OsDisk_1_900fd05f213d4ca486d44d4f8832236b')]",
+                        "name": "[concat(parameters('virtualMachines_cmwindesk_name'), '_OsDisk_1_900fd05f213d4ca486d44d4f8832236b')]",
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
                         "managedDisk": {
@@ -47,7 +47,7 @@
                     "diskControllerType": "SCSI"
                 },
                 "osProfile": {
-                    "computerName": "[parameters('virtualMachines_cmwindesk2_name')]",
+                    "computerName": "[parameters('virtualMachines_cmwindesk_name')]",
                     "adminUsername": "mouchel",
                     "windowsConfiguration": {
                         "provisionVMAgent": true,
