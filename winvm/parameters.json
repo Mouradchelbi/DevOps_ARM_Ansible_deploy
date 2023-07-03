@@ -1,18 +1,21 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-        "virtualMachines_simple_vm_name": {
-            "value": null
-        },
-        "disks_simple_vm_OsDisk_1_2c92ca7f74844862a88f0233f5c2f554_externalid": {
-            "value": null
-        },
-        "disks_simple_vm_disk2_f29ddc1bb35c4873a68d89aaf702e5c0_externalid": {
-            "value": null
-        },
-        "networkInterfaces_myVMNic_externalid": {
-            "value": null
-        }
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "dnsLabelPrefix": {
+      "value": "GEN-UNIQUE"
+    },
+    "vmName": {
+      "value": "rdpVM"
+    },
+    "adminUsername": {
+      "value": "azureUser"
+    },
+    "adminPassword": {
+      "value": "GEN-PASSWORD"
+    },
+    "rdpPort": {
+      "value": 50001
     }
+  }
 }
