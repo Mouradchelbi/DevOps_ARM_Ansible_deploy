@@ -2,16 +2,20 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "virtualMachines_cmwindesk_name": {
-            "defaultValue": "cmwindesk",
+        "virtualMachines_simple_vm_name": {
+            "defaultValue": "simple-vm",
             "type": "String"
         },
-        "disks_cmwindesk_OsDisk_1_900fd05f213d4ca486d44d4f8832236b_externalid": {
-            "defaultValue": "/subscriptions/393e3de3-0900-4b72-8f1b-fb3b1d6b97f1/resourceGroups/CMDOCKERLAB/providers/Microsoft.Compute/disks/cmwindesk_OsDisk_1_900fd05f213d4ca486d44d4f8832236b",
+        "disks_simple_vm_OsDisk_1_2c92ca7f74844862a88f0233f5c2f554_externalid": {
+            "defaultValue": "/subscriptions/393e3de3-0900-4b72-8f1b-fb3b1d6b97f1/resourceGroups/cmarmansible/providers/Microsoft.Compute/disks/simple-vm_OsDisk_1_2c92ca7f74844862a88f0233f5c2f554",
             "type": "String"
         },
-        "networkInterfaces_cmwindesk719_externalid": {
-            "defaultValue": "/subscriptions/393e3de3-0900-4b72-8f1b-fb3b1d6b97f1/resourceGroups/cmdockerlab/providers/Microsoft.Network/networkInterfaces/cmwindesk719",
+        "disks_simple_vm_disk2_f29ddc1bb35c4873a68d89aaf702e5c0_externalid": {
+            "defaultValue": "/subscriptions/393e3de3-0900-4b72-8f1b-fb3b1d6b97f1/resourceGroups/cmarmansible/providers/Microsoft.Compute/disks/simple-vm_disk2_f29ddc1bb35c4873a68d89aaf702e5c0",
+            "type": "String"
+        },
+        "networkInterfaces_myVMNic_externalid": {
+            "defaultValue": "/subscriptions/393e3de3-0900-4b72-8f1b-fb3b1d6b97f1/resourceGroups/cmarmansible/providers/Microsoft.Network/networkInterfaces/myVMNic",
             "type": "String"
         }
     },
@@ -20,42 +24,57 @@
         {
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2023-03-01",
-            "name": "[parameters('virtualMachines_cmwindesk_name')]",
-            "location": "westus",
+            "name": "[parameters('virtualMachines_simple_vm_name')]",
+            "location": "northeurope",
             "properties": {
                 "hardwareProfile": {
-                    "vmSize": "Standard_F4s_v2"
+                    "vmSize": "Standard_D2s_v5"
                 },
                 "storageProfile": {
                     "imageReference": {
-                        "publisher": "MicrosoftWindowsDesktop",
-                        "offer": "Windows-10",
-                        "sku": "win10-22h2-pro-g2",
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2022-datacenter-azure-edition",
                         "version": "latest"
                     },
                     "osDisk": {
                         "osType": "Windows",
-                        "name": "[concat(parameters('virtualMachines_cmwindesk_name'), '_OsDisk_1_900fd05f213d4ca486d44d4f8832236b')]",
+                        "name": "[concat(parameters('virtualMachines_simple_vm_name'), '_OsDisk_1_2c92ca7f74844862a88f0233f5c2f554')]",
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
                         "managedDisk": {
-                            "id": "[parameters('disks_cmwindesk_OsDisk_1_900fd05f213d4ca486d44d4f8832236b_externalid')]"
+                            "storageAccountType": "StandardSSD_LRS",
+                            "id": "[parameters('disks_simple_vm_OsDisk_1_2c92ca7f74844862a88f0233f5c2f554_externalid')]"
                         },
-                        "deleteOption": "Delete"
+                        "deleteOption": "Detach",
+                        "diskSizeGB": 127
                     },
-                    "dataDisks": [],
+                    "dataDisks": [
+                        {
+                            "lun": 0,
+                            "name": "[concat(parameters('virtualMachines_simple_vm_name'), '_disk2_f29ddc1bb35c4873a68d89aaf702e5c0')]",
+                            "createOption": "Empty",
+                            "caching": "None",
+                            "managedDisk": {
+                                "storageAccountType": "Premium_LRS",
+                                "id": "[parameters('disks_simple_vm_disk2_f29ddc1bb35c4873a68d89aaf702e5c0_externalid')]"
+                            },
+                            "deleteOption": "Detach",
+                            "diskSizeGB": 1023,
+                            "toBeDetached": false
+                        }
+                    ],
                     "diskControllerType": "SCSI"
                 },
                 "osProfile": {
-                    "computerName": "[parameters('virtualMachines_cmwindesk_name')]",
+                    "computerName": "[parameters('virtualMachines_simple_vm_name')]",
                     "adminUsername": "mouchel",
                     "windowsConfiguration": {
                         "provisionVMAgent": true,
                         "enableAutomaticUpdates": true,
                         "patchSettings": {
                             "patchMode": "AutomaticByOS",
-                            "assessmentMode": "ImageDefault",
-                            "enableHotpatching": false
+                            "assessmentMode": "ImageDefault"
                         },
                         "enableVMAgentPlatformUpdates": false
                     },
@@ -73,19 +92,16 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[parameters('networkInterfaces_cmwindesk719_externalid')]",
-                            "properties": {
-                                "deleteOption": "Detach"
-                            }
+                            "id": "[parameters('networkInterfaces_myVMNic_externalid')]"
                         }
                     ]
                 },
                 "diagnosticsProfile": {
                     "bootDiagnostics": {
-                        "enabled": true
+                        "enabled": true,
+                        "storageUri": "https://bootdiags4lnjq4pivwssk.blob.core.windows.net/"
                     }
-                },
-                "licenseType": "Windows_Client"
+                }
             }
         }
     ]
