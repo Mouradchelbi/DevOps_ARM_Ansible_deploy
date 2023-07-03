@@ -1,18 +1,15 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "adminUsername": {
-      "value": ""
-    },
-    "userData": {
-      "value": "echo userData"
-    },
-    "dnsLabelPrefix": {
-      "value": ""
-    },
-    "adminPasswordOrKey": {
-      "value": ""
-    }
-  }
+"$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+"contentVersion": "1.0.0.0",
+"parameters": {
+"adminUsername": {
+"value": "adminazure"
+},
+"adminPassword": {
+"value": ""
+},
+"dnsLabelPrefix": {
+"value": "mouchel"
+}
+}
 }
